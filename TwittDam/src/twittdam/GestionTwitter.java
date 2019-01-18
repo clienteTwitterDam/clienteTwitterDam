@@ -12,8 +12,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -76,7 +74,7 @@ public class GestionTwitter {
                 timeline.add(status.getText());
             }
         } catch (TwitterException ex) {
-            Logger.getLogger(GestionTwitter.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return timeline;
     }
