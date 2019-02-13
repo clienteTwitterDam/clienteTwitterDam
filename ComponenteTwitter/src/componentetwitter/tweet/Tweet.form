@@ -54,14 +54,16 @@
                   <Component id="jLabelAvatar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonSubirImg" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonGif" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonEncuesta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonUbicacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButtonTwittear" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonAnnadirTweet" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonSubirImg" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonGif" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonEncuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonUbicacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -82,9 +84,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="jTextAreaTweet">
           <Properties>
             <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
         </Component>
