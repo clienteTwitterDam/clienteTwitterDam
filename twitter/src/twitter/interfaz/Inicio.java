@@ -9,15 +9,24 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import logica.GestionTwitter;
+import mdlaf.MaterialLookAndFeel;
+import mdlaf.utils.MaterialColors;
+import twitter4j.Twitter;
 
 /**
  *
  * @author zapia
  */
 public class Inicio extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Inicio
      */
@@ -29,6 +38,16 @@ public class Inicio extends javax.swing.JFrame {
         ImageIcon backgroundFinal = new ImageIcon(imgBackgroundEscalado);
         jLabelBackground.setIcon(backgroundFinal);
         setResizable(false);
+        setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel(new MaterialLookAndFeel());
+            UIManager.put("Button.background", MaterialColors.BLUE_600);
+            UIManager.put("Button.foreground", MaterialColors.WHITE);
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }
 
     /**
@@ -75,6 +94,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabel1.setText("Descubre lo que está pasando en el mundo en este momento");
 
         jButtonLogin.setText("Iniciar Sesión");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,6 +143,12 @@ public class Inicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        Twitter connection = GestionTwitter.connectToTwitter();
+        PantallaPrincipal pantalla= new PantallaPrincipal(this, rootPaneCheckingEnabled, connection);
+        pantalla.setVisible(true);
+    }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments
