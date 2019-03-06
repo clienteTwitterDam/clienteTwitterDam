@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informeTwitter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9572299b-4c61-493b-b73b-079af5240dbd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="texto" class="java.lang.String">
+		<fieldDescription><![CDATA[texto]]></fieldDescription>
+	</field>
+	<field name="nombreUsuario" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreUsuario]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="131" y="17" width="321" height="45" uuid="87a92ae5-d01f-41dc-9b59-0b3d6bf51893"/>
+				<textElement>
+					<font size="24" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Lista de tweets publicados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="64" y="51" width="406" height="74" uuid="4e240cdb-c3eb-4752-bc12-84e31fa51a71"/>
+				<textFieldExpression><![CDATA[$F{texto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="22" y="20" width="42" height="20" uuid="c6c3661a-fa05-4788-89a8-b8f279aff298"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tweet:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="31" width="100" height="20" uuid="452a975e-3ce8-4306-aac5-6d6cd84f4c75"/>
+				<textFieldExpression><![CDATA[$F{nombreUsuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="11" width="100" height="20" uuid="afb305f7-d174-418c-abf3-eb6906ac82b8"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="11" width="21" height="20" uuid="8c7fe273-51de-4132-b13e-3fa5a5b0d7df"/>
+				<text><![CDATA[id:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="31" width="40" height="20" uuid="ea6e6bcd-8c94-46e3-8e8f-9fafd885ba96"/>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
