@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -20,6 +23,9 @@ import logica.GestionTwitter;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.utils.MaterialColors;
 import twitter4j.Twitter;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
 
 /**
  *
@@ -39,6 +45,17 @@ public class Inicio extends javax.swing.JFrame {
         jLabelBackground.setIcon(backgroundFinal);
         setResizable(false);
         setLocationRelativeTo(null);
+        try {
+            File fichero = new File("help/help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+        // Crea el HelpSet y el HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+        // Pone ayuda a item de menu al pulsarlo.
+            hb.enableHelpKey(this.getContentPane(), "ventana_principal", helpset);
+        } catch (MalformedURLException | HelpSetException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             UIManager.setLookAndFeel(new MaterialLookAndFeel());
             UIManager.put("Button.background", MaterialColors.BLUE_600);

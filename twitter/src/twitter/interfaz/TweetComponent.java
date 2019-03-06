@@ -9,8 +9,10 @@ import java.io.Serializable;
 import javax.swing.Icon;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+import logica.GestionTwitter;
 import mdlaf.utils.MaterialColors;
 import twitter4j.Status;
+import twitter4j.Twitter;
 
 /**
  *
@@ -18,11 +20,13 @@ import twitter4j.Status;
  */
 public class TweetComponent extends javax.swing.JPanel implements Serializable {
 
-    /**
-     * Creates new form Timeline
-     */
-    public TweetComponent(Status status) {
+    Twitter twitterConnection;
+    Status status;
+
+    TweetComponent(Status status, Twitter twitterConnection) {
         initComponents();
+        this.twitterConnection = twitterConnection;
+        this.status = status;
         UIManager.put("Button.background", MaterialColors.WHITE);
         UIManager.put("Button.foreground", MaterialColors.BLUE_600);
         jButtonUsuario.setBorder(new LineBorder(MaterialColors.BLUE_600));
@@ -30,8 +34,7 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.append(status.getText());
         jButtonUsuario.setText(status.getUser().getName());
-        jLabelFecha.setText("@"+status.getUser().getScreenName());
-        
+        jLabelFecha.setText("@" + status.getUser().getScreenName());
     }
 
     /**
@@ -47,7 +50,6 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
         jButtonRetweet = new javax.swing.JButton();
         jButtonLike = new javax.swing.JButton();
         jButtonMensaje = new javax.swing.JButton();
-        jLabelAvatar = new javax.swing.JLabel();
         jButtonUsuario = new javax.swing.JButton();
         jLabelFecha = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -61,6 +63,11 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
 
         jButtonRetweet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/twitter/img/arrows_repeat_retweet_share_icon_32.png"))); // NOI18N
         jButtonRetweet.setBorderPainted(false);
+        jButtonRetweet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetweetActionPerformed(evt);
+            }
+        });
 
         jButtonLike.setIcon(new javax.swing.ImageIcon(getClass().getResource("/twitter/img/heart_like_love_twitter_icon_32.png"))); // NOI18N
         jButtonLike.setBorderPainted(false);
@@ -72,11 +79,6 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
                 jButtonMensajeComponentRemoved(evt);
             }
         });
-
-        jLabelAvatar.setText("Avatar");
-        jLabelAvatar.setMaximumSize(new java.awt.Dimension(48, 48));
-        jLabelAvatar.setMinimumSize(new java.awt.Dimension(48, 48));
-        jLabelAvatar.setPreferredSize(new java.awt.Dimension(48, 48));
 
         jButtonUsuario.setText("usuario");
 
@@ -94,12 +96,9 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(45, 45, 45)
@@ -109,24 +108,21 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
                                 .addGap(45, 45, 45)
                                 .addComponent(jButtonMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 200, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(237, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonUsuario)
-                            .addComponent(jLabelFecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUsuario)
+                    .addComponent(jLabelFecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonResponder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,6 +137,10 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMensajeComponentRemoved
 
+    private void jButtonRetweetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetweetActionPerformed
+        GestionTwitter.retwitear(twitterConnection, status.getId());
+    }//GEN-LAST:event_jButtonRetweetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLike;
@@ -148,7 +148,6 @@ public class TweetComponent extends javax.swing.JPanel implements Serializable {
     private javax.swing.JButton jButtonResponder;
     private javax.swing.JButton jButtonRetweet;
     private javax.swing.JButton jButtonUsuario;
-    private javax.swing.JLabel jLabelAvatar;
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

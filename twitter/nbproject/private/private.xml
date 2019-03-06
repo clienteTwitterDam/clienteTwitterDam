@@ -5,11 +5,6 @@
         <group name="FPS2">
             <file>file:/D:/FP/NetBeans%208.2/proyectos/FPSegundo/DI/Proyecto%20Twitter/clienteTwitterDam/twitter/src/twitter/interfaz/Inicio.java</file>
         </group>
-        <group>
-            <file>file:/C:/Users/migue/Documents/GitHub/clienteTwitterDam/twitter/src/twitter/interfaz/TextAreaMaxLenght.java</file>
-            <file>file:/C:/Users/migue/Documents/GitHub/clienteTwitterDam/twitter/src/twitter/interfaz/Inicio.java</file>
-            <file>file:/C:/Users/migue/Documents/GitHub/clienteTwitterDam/twitter/src/twitter/interfaz/TweetComponent.java</file>
-            <file>file:/C:/Users/migue/Documents/GitHub/clienteTwitterDam/twitter/src/twitter/interfaz/PantallaPrincipal.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
